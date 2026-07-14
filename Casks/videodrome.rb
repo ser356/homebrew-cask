@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 0.2.0, v0.2.0, a105d3f472c41192660ad74e97b996541a466a9a63df4b3df6fd693190561289 y ser356/letterboxd-cli y publica el fichero final
+# 0.2.1, v0.2.1, 387251bb26c933888609a40960570c6232b560691f6232272d15dfbf16a51b25 y ser356/letterboxd-cli y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -17,17 +17,19 @@
 #      caches, credenciales del Keychain no se tocan — se limpian con
 #      `videodrome keychain clear`).
 cask "videodrome" do
-  version "0.2.0"
-  sha256 "a105d3f472c41192660ad74e97b996541a466a9a63df4b3df6fd693190561289"
+  version "0.2.1"
+  sha256 "387251bb26c933888609a40960570c6232b560691f6232272d15dfbf16a51b25"
 
-  url "https://github.com/ser356/letterboxd-cli/releases/download/v0.2.0/videodrome-v0.2.0-macos-arm64.zip"
+  url "https://github.com/ser356/letterboxd-cli/releases/download/v0.2.1/videodrome-v0.2.1-macos-arm64.zip"
   name "Videodrome"
   desc "Recomendaciones Letterboxd + streaming BitTorrent en VLC"
   homepage "https://github.com/ser356/letterboxd-cli"
 
   # arm64 only — los runners macos-13 Intel de Actions están deprecated.
   # Los Macs Intel con Rosetta 2 pueden ejecutar el binario arm64.
-  depends_on macos: ">= :catalina"
+  # Homebrew acepta un símbolo suelto como versión mínima; el formato
+  # string ">= :catalina" quedó deprecated en 2025+.
+  depends_on macos: :catalina
   depends_on cask: "vlc"
 
   app "Videodrome.app"
