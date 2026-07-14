@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 0.2.0, v0.2.0, 5d387fe5f13111c05c8269b67755f454b78d00fd67b7e0b037d27641dbe24eb7 y ser356/letterboxd-cli y publica el fichero final
+# 0.2.0, v0.2.0, a105d3f472c41192660ad74e97b996541a466a9a63df4b3df6fd693190561289 y ser356/letterboxd-cli y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -18,7 +18,7 @@
 #      `videodrome keychain clear`).
 cask "videodrome" do
   version "0.2.0"
-  sha256 "5d387fe5f13111c05c8269b67755f454b78d00fd67b7e0b037d27641dbe24eb7"
+  sha256 "a105d3f472c41192660ad74e97b996541a466a9a63df4b3df6fd693190561289"
 
   url "https://github.com/ser356/letterboxd-cli/releases/download/v0.2.0/videodrome-v0.2.0-macos-arm64.zip"
   name "Videodrome"
