@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 0.4.2, v0.4.2, 7cbfc30bed9b3010ae8e7f116efea68a12fa8608e3ef8ef94a6036cab7765e67 y ser356/videodrome y publica el fichero final
+# 0.4.2, v0.4.2, 35e9439fef091df98336227d46dec2a87bff3b64d753701fba48131e193cf111 y ser356/videodrome y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -18,7 +18,7 @@
 #      `videodrome keychain clear`).
 cask "videodrome" do
   version "0.4.2"
-  sha256 "7cbfc30bed9b3010ae8e7f116efea68a12fa8608e3ef8ef94a6036cab7765e67"
+  sha256 "35e9439fef091df98336227d46dec2a87bff3b64d753701fba48131e193cf111"
 
   url "https://github.com/ser356/videodrome/releases/download/v0.4.2/videodrome-v0.4.2-macos-arm64.zip"
   name "Videodrome"
