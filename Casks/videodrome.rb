@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 0.4.4, v0.4.4, 80240e79d08e798ea48a2c8db4898bb2c97c0071308fd2bf252e4c7e04a6aa87 y ser356/videodrome y publica el fichero final
+# 1.0.0, v1.0.0, ca6f8db98ad16b5fc3f58f43f680327f002e03d5d4dc5cc8272b1edd434930d0 y ser356/videodrome y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -17,12 +17,12 @@
 #      caches, credenciales del Keychain no se tocan — se limpian con
 #      `videodrome keychain clear`).
 cask "videodrome" do
-  version "0.4.4"
-  sha256 "80240e79d08e798ea48a2c8db4898bb2c97c0071308fd2bf252e4c7e04a6aa87"
+  version "1.0.0"
+  sha256 "ca6f8db98ad16b5fc3f58f43f680327f002e03d5d4dc5cc8272b1edd434930d0"
 
-  url "https://github.com/ser356/videodrome/releases/download/v0.4.4/videodrome-v0.4.4-macos-arm64.zip"
+  url "https://github.com/ser356/videodrome/releases/download/v1.0.0/videodrome-v1.0.0-macos-arm64.zip"
   name "Videodrome"
-  desc "Recomendaciones Letterboxd + streaming BitTorrent en VLC"
+  desc "Recomendaciones Letterboxd + streaming BitTorrent con player embebido"
   homepage "https://github.com/ser356/videodrome"
 
   # arm64 only — los runners macos-13 Intel de Actions están deprecated.
@@ -30,7 +30,13 @@ cask "videodrome" do
   # Homebrew acepta un símbolo suelto como versión mínima; el formato
   # string ">= :catalina" quedó deprecated en 2025+.
   depends_on macos: :catalina
-  depends_on cask: "vlc"
+  # ffmpeg = dependencia REAL. El player HTML embebido lo usa para
+  # transmux (MKV/HEVC/VP9 → fMP4 fragmentado sobre HLS) y no arranca
+  # sin él. VLC ya no es dependencia forzada — quedaba como fallback
+  # externo cuando el player embebido no existía, pero desde
+  # v0.4.x el default es el embebido y VLC es opt-in desde Ajustes.
+  # Si el user lo quiere, se instala aparte con `brew install --cask vlc`.
+  depends_on formula: "ffmpeg"
 
   app "Videodrome.app"
 
@@ -65,6 +71,11 @@ cask "videodrome" do
       videodrome recommend
       videodrome tui
       videodrome torrents "Alien" --year 1979
+
+    Reproductor: por defecto usa el player embebido (requiere el
+    formula `ffmpeg`, que se instala como dependencia). Si prefieres
+    VLC externo, instálalo aparte con `brew install --cask vlc` y
+    cambia el reproductor en Ajustes.
 
     Requiere sesión Letterboxd la primera vez (login desde la GUI o
     variables de entorno).
