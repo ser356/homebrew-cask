@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 1.2.0, 1.2.0, 466a7145e594bf7f5f0b1a5e122fb7c086c35585a5017e7fe08e8fe4ecdb0573 y ser356/videodrome y publica el fichero final
+# 1.3.0, v1.3.0, ced793a4cfad4ae1a82f0f93a9a29202fb22294fd45e122fe6fc09fffc142e0e y ser356/videodrome y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -17,10 +17,10 @@
 #      caches, credenciales del Keychain no se tocan — se limpian con
 #      `videodrome keychain clear`).
 cask "videodrome" do
-  version "1.2.0"
-  sha256 "466a7145e594bf7f5f0b1a5e122fb7c086c35585a5017e7fe08e8fe4ecdb0573"
+  version "1.3.0"
+  sha256 "ced793a4cfad4ae1a82f0f93a9a29202fb22294fd45e122fe6fc09fffc142e0e"
 
-  url "https://github.com/ser356/videodrome/releases/download/1.2.0/videodrome-1.2.0-macos-arm64.zip"
+  url "https://github.com/ser356/videodrome/releases/download/v1.3.0/videodrome-v1.3.0-macos-arm64.zip"
   name "Videodrome"
   desc "Recomendaciones Letterboxd + streaming BitTorrent con player embebido"
   homepage "https://github.com/ser356/videodrome"
