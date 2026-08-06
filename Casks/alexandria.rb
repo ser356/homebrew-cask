@@ -14,7 +14,7 @@
 #   5. `brew uninstall --cask` + `--zap` borra config del user.
 cask "alexandria" do
   version "0.1.0"
-  sha256 "0dffbc1b4f0f0744b42df1d871334a05e9c2124da92b3c7c3fafe8ff70aef303"
+  sha256 "72d3ddc8aae785da15a223d8cf45c3b52f9ff0302ee72e2d8eb2b66b0db3a2ed"
 
   url "https://github.com/ser356/alexandria-releases/releases/download/v#{version}/Alexandria_#{version}_aarch64.dmg"
   name "Alexandria"
