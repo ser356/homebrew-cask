@@ -13,8 +13,8 @@
 #      sin el bloqueo de Gatekeeper típico de apps no notarizadas.
 #   5. `brew uninstall --cask` + `--zap` borra config del user.
 cask "alexandria" do
-  version "0.3.0"
-  sha256 "1a09aabdbda2b91aa298ed2b49e96a0677b60a79efd650241efb29e6142a35c9"
+  version "0.3.1"
+  sha256 "3ccb063e30c4eaf03a929a180a66d70dbe68f43e8d72e87949565d9f865b5314"
 
   url "https://github.com/ser356/alexandria-releases/releases/download/v#{version}/Alexandria_#{version}_aarch64.dmg"
   name "Alexandria"
