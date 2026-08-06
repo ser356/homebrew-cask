@@ -1,5 +1,5 @@
 # Homebrew Cask template — el workflow de release sustituye
-# 1.15.2, v1.15.2, d98e0992bafd1a6d45bed09457c75e490a5c4bf5f5fc957866f65f53c2480838 y ser356/videodrome y publica el fichero final
+# 1.15.3, v1.15.3, 084892503a06642c024f6fb1b74c99a54e4ef923861f9a46cc9b69fa3fd8b460 y ser356/videodrome-releases y publica el fichero final
 # en `ser356/homebrew-cask/Casks/videodrome.rb`.
 #
 # Instalación:
@@ -17,13 +17,13 @@
 #      caches, credenciales del Keychain no se tocan — se limpian con
 #      `videodrome keychain clear`).
 cask "videodrome" do
-  version "1.15.2"
-  sha256 "d98e0992bafd1a6d45bed09457c75e490a5c4bf5f5fc957866f65f53c2480838"
+  version "1.15.3"
+  sha256 "084892503a06642c024f6fb1b74c99a54e4ef923861f9a46cc9b69fa3fd8b460"
 
-  url "https://github.com/ser356/videodrome/releases/download/v1.15.2/videodrome-v1.15.2-macos-arm64.zip"
+  url "https://github.com/ser356/videodrome-releases/releases/download/v1.15.3/videodrome-v1.15.3-macos-arm64.zip"
   name "Videodrome"
   desc "Recomendaciones Letterboxd + streaming BitTorrent con player embebido"
-  homepage "https://github.com/ser356/videodrome"
+  homepage "https://github.com/ser356/videodrome-releases"
 
   # arm64 only — los runners macos-13 Intel de Actions están deprecated.
   # Los Macs Intel con Rosetta 2 pueden ejecutar el binario arm64.
