@@ -21,15 +21,13 @@ cask "alexandria" do
   desc "Descubre y descarga ebooks desde fuentes abiertas"
   homepage "https://github.com/ser356/alexandria-releases"
 
-  # arm64 only por ahora. Los Macs Intel con Rosetta 2 pueden ejecutar
-  # el binario arm64 igualmente.
-  depends_on macos: :catalina
-
-  app "Alexandria.app"
+  depends_on arch: :arm64
+  depends_on :macos
 
   # Symlink del binario dentro del bundle → user puede correr:
   #   alexandria                 # sin args = GUI
   #   alexandria search "..."    # CLI
+  app "Alexandria.app"
   binary "#{appdir}/Alexandria.app/Contents/MacOS/alexandria", target: "alexandria"
 
   # Limpia com.apple.quarantine automáticamente tras la instalación.
@@ -38,11 +36,16 @@ cask "alexandria" do
   # (solo aparece "Trasladar a la papelera"). La firma ad-hoc que
   # cargo tauri build genera es correcta — el bloqueo es puramente por
   # el flag de cuarentena que Gatekeeper añade al descargar el DMG.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-cr", "#{appdir}/Alexandria.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{appdir}}/Alexandria.app"]
   end
+
+  zap trash: [
+    "~/Library/Application Support/dev.ser356.alexandria",
+    "~/Library/Caches/dev.ser356.alexandria",
+    "~/Library/Preferences/dev.ser356.alexandria.plist",
+    "~/Library/WebKit/dev.ser356.alexandria",
+  ]
 
   caveats <<~EOS
     Alexandria no está firmado con Developer ID de Apple (solo firma
@@ -56,11 +59,4 @@ cask "alexandria" do
       alexandria search "titulo"
       alexandria download <edition-id>
   EOS
-
-  zap trash: [
-    "~/Library/Application Support/dev.ser356.alexandria",
-    "~/Library/Caches/dev.ser356.alexandria",
-    "~/Library/Preferences/dev.ser356.alexandria.plist",
-    "~/Library/WebKit/dev.ser356.alexandria",
-  ]
 end

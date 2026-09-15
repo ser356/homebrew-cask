@@ -26,25 +26,22 @@ cask "videodrome" do
   homepage "https://github.com/ser356/videodrome-releases"
 
   # arm64 only — los runners macos-13 Intel de Actions están deprecated.
-  # Los Macs Intel con Rosetta 2 pueden ejecutar el binario arm64.
-  # Homebrew acepta un símbolo suelto como versión mínima; el formato
-  # string ">= :catalina" quedó deprecated en 2025+.
-  depends_on macos: :catalina
   # ffmpeg = dependencia REAL. El player HTML embebido lo usa para
   # transmux (MKV/HEVC/VP9 → fMP4 fragmentado sobre HLS) y no arranca
   # sin él. VLC ya no es dependencia forzada — quedaba como fallback
   # externo cuando el player embebido no existía, pero desde
   # v0.4.x el default es el embebido y VLC es opt-in desde Ajustes.
   # Si el user lo quiere, se instala aparte con `brew install --cask vlc`.
+  depends_on arch: :arm64
   depends_on formula: "ffmpeg"
-
-  app "Videodrome.app"
+  depends_on :macos
 
   # Symlink del binario dentro del bundle → user puede correr:
   #   videodrome                 # sin args = GUI
   #   videodrome recommend       # CLI
   #   videodrome torrents "..."  # CLI
   #   videodrome tui             # TUI en terminal
+  app "Videodrome.app"
   binary "#{appdir}/Videodrome.app/Contents/MacOS/videodrome", target: "videodrome"
 
   # Limpia com.apple.quarantine automáticamente tras la instalación.
@@ -53,11 +50,16 @@ cask "videodrome" do
   # (solo aparece "Trasladar a la papelera"). La firma ad-hoc que
   # cargo tauri build genera es correcta — el bloqueo es puramente por
   # el flag de cuarentena que Gatekeeper añade al descargar el zip.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-cr", "#{appdir}/Videodrome.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{appdir}}/Videodrome.app"]
   end
+
+  zap trash: [
+    "~/Library/Application Support/videodrome",
+    "~/Library/Caches/dev.ser356.videodrome",
+    "~/Library/Preferences/dev.ser356.videodrome.plist",
+    "~/Library/WebKit/dev.ser356.videodrome",
+  ]
 
   caveats <<~EOS
     Videodrome no está firmado con Developer ID de Apple (solo firma
@@ -80,11 +82,4 @@ cask "videodrome" do
     Requiere sesión Letterboxd la primera vez (login desde la GUI o
     variables de entorno).
   EOS
-
-  zap trash: [
-    "~/Library/Application Support/videodrome",
-    "~/Library/Caches/dev.ser356.videodrome",
-    "~/Library/Preferences/dev.ser356.videodrome.plist",
-    "~/Library/WebKit/dev.ser356.videodrome",
-  ]
 end
